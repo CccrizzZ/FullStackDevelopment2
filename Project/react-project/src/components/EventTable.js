@@ -3,22 +3,26 @@ import DataGrid from 'react-data-grid'
 // import mongoose from 'mongoose'
 // import Chat from '../schemas/ChatHistory'
 // import Event from '../schemas/EventHistory'
-import io from 'socket.io-client'
+import io from 'socket.io-client/dist/socket.io'
 
-const socket = io('http://127.0.0.1:8080', {})
-
-// const socket = io()
+// const socket = io.connect('http://127.0.0.1:8080')
 
 
 
-class Table extends React.Component {
+
+class EventTable extends React.Component {
   constructor(props){
     super(props)
 
     this.state = {
       columns: [
         { key: 'type', name: 'Type' },
-        { key: 'date', name: 'Date' }
+        { key: 'date', name: 'Date' },
+        { key: 'time', name: 'Time' },
+        { key: 'user', name: 'User' },
+        { key: 'eventid', name: 'EventID'},
+        { key: 'PPID', name: 'PPID'}
+
       ],
       rows: [
         { date: 0, type: 'Example' },
@@ -33,10 +37,13 @@ class Table extends React.Component {
   }
 
   componentDidMount(){
-    // this.setState({
-    //   socket: webSocket('http://127.0.0.1:8080')
-    // })
+    fetch('http://localhost:8080')
+    .then(response => {
+      response.json().then(data => {
+        this.setState({ items: data})
 
+      })
+    })
   }
     
   componentWillUnmount(){
@@ -45,7 +52,7 @@ class Table extends React.Component {
 
   render() {
     return (
-      <div style={{width: '50%', margin: 'auto'}}>
+      <div style={{width: '62%', margin: 'auto'}}>
 
         <DataGrid columns={this.state.columns} rows={this.state.rows} />
       </div>
@@ -53,4 +60,4 @@ class Table extends React.Component {
   }
 }
 
-export default Table
+export default EventTable

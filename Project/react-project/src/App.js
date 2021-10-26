@@ -9,7 +9,7 @@ import Login from './components/Login'
 function App() {
   return (
     <div className="bg">
-      <Login />
+      <Table />
     </div>
   )
 }

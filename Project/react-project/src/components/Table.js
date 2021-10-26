@@ -3,6 +3,12 @@ import DataGrid from 'react-data-grid'
 // import mongoose from 'mongoose'
 // import Chat from '../schemas/ChatHistory'
 // import Event from '../schemas/EventHistory'
+import io from 'socket.io-client'
+
+const socket = io('http://127.0.0.1:8080', {})
+
+// const socket = io()
+
 
 
 class Table extends React.Component {
@@ -17,16 +23,25 @@ class Table extends React.Component {
       rows: [
         { date: 0, type: 'Example' },
         { date: 1, type: 'Demo' }
-      ]
+      ],
+      socket: 0
     }
+
+
+
 
   }
 
   componentDidMount(){
-    // load data from db
+    // this.setState({
+    //   socket: webSocket('http://127.0.0.1:8080')
+    // })
+
   }
     
+  componentWillUnmount(){
 
+  }
 
   render() {
     return (

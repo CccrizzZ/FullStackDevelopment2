@@ -14,17 +14,16 @@ function App() {
   return (
     <BrowserRouter >
       <div className="bg">
-        <ButtonGroup className="mb-2" style={{display: 'flex', }}>
-          <Button><Link to="/eventhistory" style={{color: 'white'}}>Event History</Link></Button>
-          <Button><Link to="/chathistory" style={{color: 'white'}}>Chat History</Link></Button>
-          <Button><Link to="/rooms" style={{color: 'white'}}>Rooms</Link></Button>
+        <ButtonGroup className="mb-2" style={{right: '-38%'}}>
+          <Link to="/eventhistory" style={{color: 'white'}}><Button>Event History</Button></Link>
+          <Link to="/chathistory" style={{color: 'white'}}><Button>Chat History</Button></Link>
+          <Link to="/rooms"style={{color: 'white'}}><Button>Rooms</Button></Link>
         </ButtonGroup>
         <Switch>
+          <Route path="/" component={Login} exact /> 
           <Route path="/eventhistory" component={EventTable} exact />
           <Route path="/chathistory" component={ChatTable} exact />
           <Route path="/rooms" component={ChatTable} exact />
-
-
         </Switch>
       </div>
     </BrowserRouter>

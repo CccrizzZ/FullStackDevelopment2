@@ -1,6 +1,7 @@
-import mongoose from "mongoose"
+// import mongoose from "mongoose"
+const mongoose = require('mongoose')
 
-// order schema
+// schema
 const EventSchema = new mongoose.Schema({
     Type: {
         type: String,

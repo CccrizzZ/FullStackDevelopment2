@@ -1,6 +1,8 @@
-import mongoose from "mongoose"
+// import mongoose from "mongoose"
+const mongoose = require('mongoose')
 
-// order schema
+
+// schema
 const ChatSchema = new mongoose.Schema({
     ID: {
         type: String,

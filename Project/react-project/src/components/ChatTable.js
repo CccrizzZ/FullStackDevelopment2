@@ -1,13 +1,6 @@
 import React from 'react'
 import DataGrid from 'react-data-grid'
-// import mongoose from 'mongoose'
-// import Chat from '../schemas/ChatHistory'
-// import Event from '../schemas/EventHistory'
-import io from 'socket.io-client/dist/socket.io'
-
-// const socket = io.connect('http://127.0.0.1:8080')
-
-// const socket = io()
+import axios from 'axios'
 
 
 
@@ -17,20 +10,18 @@ class ChatTable extends React.Component {
 
     this.state = {
       columns: [
-        { key: 'id', name: 'ID' },
-        { key: 'date', name: 'Date' },
-        { key: 'time', name: 'Time' },
-        { key: 'sender', name: 'Sender' },
-        { key: 'receiver', name: 'Receiver'},
-        { key: 'message', name: 'Message'},
-        { key: 'room', name: 'Room'}
+        { key: 'ID', name: 'ID' },
+        { key: 'Date', name: 'Date' },
+        { key: 'Time', name: 'Time' },
+        { key: 'Sender', name: 'Sender' },
+        { key: 'Receiver', name: 'Receiver'},
+        { key: 'Message', name: 'Message'},
+        { key: 'Room', name: 'Room'}
         
       ],
       rows: [
-        { date: 0, sender: 'Chat' },
-        { date: 1, sender: 'Table' }
-      ],
-      socket: 0
+
+      ]
     }
 
 
@@ -39,16 +30,11 @@ class ChatTable extends React.Component {
   }
 
   componentDidMount(){
-    // this.setState({
-    //   socket: webSocket('http://127.0.0.1:8080')
-    // })
-    fetch('http://localhost:8080')
-    .then(response => {
-      response.json().then(data => {
-        this.setState({ items: data})
 
-      })
+    axios.get("http://127.0.0.1:8080/chat").then((response) => {
+        this.setState({rows: response.data})
     })
+
   }
     
   componentWillUnmount(){
@@ -58,8 +44,7 @@ class ChatTable extends React.Component {
   render() {
     return (
       <div style={{width: '62%', margin: 'auto'}}>
-
-        <DataGrid columns={this.state.columns} rows={this.state.rows} />
+        <DataGrid columns={this.state.columns} rows={this.state.rows} style={{height: '500px'}} />
       </div>
     )
   }
